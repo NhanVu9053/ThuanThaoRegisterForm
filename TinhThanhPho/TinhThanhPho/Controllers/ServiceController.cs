@@ -30,7 +30,7 @@ namespace TinhThanhPho.Controllers
         }
         public IActionResult GetAllDistrictByProvinceId(int? id)
         {
-            using (var connection = new SqlConnection("Server=.\\SQLEXPRESS;Database=TinhThanhVietNam;Trusted_Connection=True;"))
+            using (var connection = new SqlConnection("Server=HOANGLINH;Database=ThuanThaoDrugstore;Trusted_Connection=True;"))
             {
                 string query = "select * from district where district._province_id= @Id";
                 var districts = connection.Query<District>(query, new { Id = id });
@@ -40,7 +40,7 @@ namespace TinhThanhPho.Controllers
         }
         public IActionResult GetAllWardByDistrictId(int? id)
         {
-            using (var connection = new SqlConnection("Server=.\\SQLEXPRESS;Database=TinhThanhVietNam;Trusted_Connection=True;"))
+            using (var connection = new SqlConnection("Server=HOANGLINH;Database=ThuanThaoDrugstore;Trusted_Connection=True;"))
             {
                 string query = "select * from ward where ward._district_id = @Id";
                 var districts = connection.Query<District>(query, new { Id = id });
