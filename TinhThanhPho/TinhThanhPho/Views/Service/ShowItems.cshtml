@@ -1,0 +1,32 @@
+﻿@inject TinhThanhPho.Controllers.MyDbContext DbContext
+@{
+    ViewData["Title"] = "Show Items";
+}
+
+
+
+<table class=" table table-bordered table-hover mt-3">
+    <thead class=" thead-light">
+        <tr>
+            <th>Id</th>
+            <th>Họ tên</th>
+            <th>Email</th>
+            <th>Địa chỉ</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in DbContext.users)
+        {
+            <tr>
+                <td>@item.MaTK</td>
+                <td>@item.HoTen</td>
+                <td> @item.Email </td>
+                <td>@item.Diachi</td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>

@@ -1,0 +1,186 @@
+﻿
+@model User
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+
+
+
+<h1>Đăng ký tài khoản</h1>
+<p>
+    Nếu bạn đã có tài khoản trên website xin hãy đăng nhập tại <a href="/Account/Login"
+                                                                  style="color:#024b94">đây</a>.
+</p>
+
+<form asp-controller="Service" asp-action="Create" method="post" class=" mt-4">
+    <div asp-validation-summary="None" class=" text-danger"></div>
+
+    <strong>Thông tin cá nhân</strong><hr />
+    <div class=" row form-group ">
+        <div class="col-sm-2 ">           
+            <label style="font-weight: bold" asp-for=" HoTen"></label>
+        </div>
+        <div class=" col-sm-10">
+            <input placeholder="Họ và tên" asp-for=" HoTen" class=" form-control" />
+            <span asp-validation-for=" HoTen" class=" text-danger"></span>
+        </div>
+    </div>
+    <div class=" row form-group">
+        <div class="col-sm-2">
+            <label class=" textbold" asp-for=" Email"></label>
+        </div>
+        <div class=" col-sm-10">
+            <input placeholder="E-Mail" asp-for=" Email" class=" form-control" />
+            <span asp-validation-for=" Email" class=" text-danger"></span>
+        </div>
+    </div>
+    <div class=" row form-group">
+        <div class="col-sm-2">
+            <label asp-for=" SoDienThoai"></label>
+        </div>
+        <div class=" col-sm-10">
+            <input placeholder="Số điện thoại" asp-for=" SoDienThoai" class=" form-control" />
+            <span asp-validation-for=" SoDienThoai" class=" text-danger"></span>
+        </div>
+    </div>
+
+    <div class=" row form-group">
+        <div class="col-sm-2">
+            <label asp-for=" MatKhau"></label>
+        </div>
+        <div class=" col-sm-10">
+            <input placeholder="Mật khẩu" asp-for=" MatKhau" class=" form-control" />
+            <span asp-validation-for=" MatKhau" class=" text-danger"></span>
+        </div>
+    </div>
+
+    <div class=" row form-group">
+        <div class="col-sm-2">
+            <label asp-for=" XacnhanMatKhau "></label>
+        </div>
+        <div class=" col-sm-10">
+            <input placeholder="Gõ lại mật khẩu bạn đã điền ở trên" asp-for=" XacnhanMatKhau" class=" form-control" />
+            <span asp-validation-for=" XacnhanMatKhau" class=" text-danger"></span>
+        </div>
+    </div>
+
+
+
+
+    // chonh tinh thanh pho
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label asp-for=" TinhTp " for="ddlProvince">Tỉnh thành</label>
+                <select asp-for="TinhTp" id="ddlProvince" class="form-control" onclick="getAllDistByPID(this.value)">
+
+                    <option value="">Chọn tỉnh thành</option>
+                </select>
+                <span asp-validation-for=" TinhTp" class=" text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuanHuyen" for="ddlDistrict">Quận/Huyện</label>
+                <select asp-for="QuanHuyen" id="ddlDistrict" class="form-control" onclick="getAllWardByPID(this.value)">
+                    <option value="">Chọn quận/huyện</option>
+                </select>
+                <span asp-validation-for=" QuanHuyen" class=" text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhuongXa" for="ddlWard">Phường/Xã</label>
+                <select asp-for="PhuongXa" id="ddlWard" class="form-control">
+                    <option value="">Chọn phường/xã</option>
+                </select>
+                <span asp-validation-for=" PhuongXa" class=" text-danger"></span>
+            </div>
+            <div class=" row form-group">
+                <div class="col-sm-2">
+                    <label asp-for=" Diachi "></label>
+                </div>
+                <div class=" col-sm-10">
+                    <input asp-for=" Diachi" class=" form-control" />
+                    <span asp-validation-for=" Diachi" class=" text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="text-success">
+                    Bạn đang ở khu vực: <div id="divResult"></div>
+                </div>
+            </div>
+            <div asp-validation-summary="None"></div>
+            <div class=" row form-group">
+
+                <div class=" col-sm-12">
+                    <button type="submit" class=" btn btn-primary">Create</button>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-warning">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @section Scripts1 {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }
+    @section Scripts{
+        <script>
+            getAllProvinces();
+            function getAllProvinces() {
+                $.ajax({
+                    url: '/Service/GetAllProvinces',
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        for (let i = 0; i < data.length; i++) {
+                            console.log(data[i]);
+                            $('#ddlProvince').append(`<option value='${data[i].id}'>${data[i]._name}</option>`);
+                        }
+                    }
+                });
+            }
+            function getAllDistByPID(id) {
+                $.ajax({
+                    url: '/Service/GetAllDistrictByProvinceId/' + id,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        $('#ddlDistrict').html('<option value="">Chọn quận/huyện</option>');
+                        for (let i = 0; i < data.length; i++) {
+                            $('#ddlDistrict').append(`<option value='${data[i].id}'>${data[i]._name}</option>`);
+                        }
+                    }
+                });
+            }
+            function getAllWardByPID(id) {
+                $.ajax({
+                    url: '/Service/GetAllWardByDistrictId/' + id,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        $('#ddlWard').empty();
+                        $('#ddlWard').append('<option value="">Chọn phường/xã</option>');
+                        for (let i = 0; i < data.length; i++) {
+                     
+                            $('#ddlWard').append(`<option value='${data[i].id}'>${data[i]._name}</option>`);
+                        }
+                    }
+                });
+            }
+            $("#ddlWard").on('change', function () {
+                var provinceText = $("#ddlProvince option:selected").text();
+                var districtText = $("#ddlDistrict option:selected").text();
+                var wardText = $("#ddlWard option:selected").text();
+                var html = "Tỉnh thành: " + provinceText + " " + "Quận huyện: " + districtText + " " + "Xã phường: " + wardText;
+                $("#divResult").html(html);
+            });
+        </script>
+    }
+
+
