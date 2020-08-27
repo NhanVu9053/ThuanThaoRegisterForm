@@ -3,20 +3,18 @@
     ViewData["Title"] = "Show Items";
 }
 
+<h2>Bảng thông tin các tài khoản</h2>
 
-
-<table class=" table table-bordered table-hover mt-3">
+<table id="dataTable" class=" table table-bordered table-hover mt-3">
     <thead class=" thead-light">
         <tr>
             <th>Id</th>
             <th>Họ tên</th>
             <th>Email</th>
             <th>Địa chỉ</th>
-
         </tr>
     </thead>
     <tbody>
-
         @foreach (var item in DbContext.users)
         {
             <tr>
@@ -27,6 +25,14 @@
             </tr>
 
         }
-
     </tbody>
 </table>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').dataTable();
+        });
+    </script>
+}

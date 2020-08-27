@@ -18,6 +18,39 @@ namespace TinhThanhPho.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("TinhThanhPho.Models.District", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("_name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("_province_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("district");
+                });
+
+            modelBuilder.Entity("TinhThanhPho.Models.Province", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("_name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("province");
+                });
+
             modelBuilder.Entity("TinhThanhPho.Models.User", b =>
                 {
                     b.Property<int>("MaTK")
@@ -27,8 +60,7 @@ namespace TinhThanhPho.Migrations
 
                     b.Property<string>("Diachi")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -68,6 +100,24 @@ namespace TinhThanhPho.Migrations
                     b.HasKey("MaTK");
 
                     b.ToTable("users");
+                });
+
+            modelBuilder.Entity("TinhThanhPho.Models.Ward", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("_district_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("_name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ward");
                 });
 #pragma warning restore 612, 618
         }
