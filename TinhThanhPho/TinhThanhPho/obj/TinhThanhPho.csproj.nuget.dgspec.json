@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\WBD\\Module3\\BaiTapNhom\\TinhThanhPho\\TinhThanhPho\\TinhThanhPho.csproj": {}
+    "D:\\C0520G1\\TinhThanhPho\\TinhThanhPho\\TinhThanhPho.csproj": {}
   },
   "projects": {
-    "D:\\WBD\\Module3\\BaiTapNhom\\TinhThanhPho\\TinhThanhPho\\TinhThanhPho.csproj": {
+    "D:\\C0520G1\\TinhThanhPho\\TinhThanhPho\\TinhThanhPho.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\WBD\\Module3\\BaiTapNhom\\TinhThanhPho\\TinhThanhPho\\TinhThanhPho.csproj",
+        "projectUniqueName": "D:\\C0520G1\\TinhThanhPho\\TinhThanhPho\\TinhThanhPho.csproj",
         "projectName": "TinhThanhPho",
-        "projectPath": "D:\\WBD\\Module3\\BaiTapNhom\\TinhThanhPho\\TinhThanhPho\\TinhThanhPho.csproj",
+        "projectPath": "D:\\C0520G1\\TinhThanhPho\\TinhThanhPho\\TinhThanhPho.csproj",
         "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "D:\\WBD\\Module3\\BaiTapNhom\\TinhThanhPho\\TinhThanhPho\\obj\\",
+        "outputPath": "D:\\C0520G1\\TinhThanhPho\\TinhThanhPho\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
